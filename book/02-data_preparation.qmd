@@ -31,6 +31,8 @@ df_obs <- readr::read_csv(
   here("data-raw/soildata/berne_soil_sampling_locations.csv")
 )
 
+print(here())
+
 # Display data
 head(df_obs) |>
   knitr::kable()
