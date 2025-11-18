@@ -118,7 +118,7 @@ df_test$pred <- prediction$predictions
 
 ### Model metrics
 
-Now that we have our predictions ready, we can extract standard metrics for a regression problem (see [AGDS Chapter 8.2.2](https://geco-bern.github.io/agds_book/regression_classification.html#regression)).
+Now that we have our predictions ready, we can extract standard metrics for a classification problem (see [AGDS Chapter 8.2.2](https://geco-bern.github.io/agds_book/regression_classification.html#regression)).
 
 ```{r}
 # Calculate error

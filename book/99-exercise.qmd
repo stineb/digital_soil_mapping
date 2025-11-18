@@ -8,7 +8,7 @@ Re-implement the digital soil mapping workflow, using Random Forest, as demonstr
 
 - Make sure that the categorical target variable is encoded as a factor using the function `factor()`.
 - Start with a model that includes all predictors, trained on the pre-defined training subset.
-- Evaluate the model on the testing subset of the data. Consider appropriate metrics as described in [AGDS Book Chapter 8.3](https://geco-bern.github.io/agds_book/regression_classification.html#extra-material). Is the data balanced in terms of observed `TRUE` and `FALSE` values? What does this imply for the interpretation of the different metrics?
+- Evaluate the model on the testing subset of the data. Consider appropriate metrics as described in [AGDS Book 9.4.1.2](https://geco-bern.github.io/agds_book/regression_classification.html#metrics-for-classification). Is the data balanced in terms of observed `TRUE` and `FALSE` values? What does this imply for the interpretation of the different metrics?
 
 ## Variable selection
 
@@ -22,7 +22,7 @@ In [AGDS Book Chapter 11](https://geco-bern.github.io/agds_book/randomforest.htm
 
 ## Probabilistic predictions
 
-Using the optimised (or if you didn't manage - the initial default) hyperparameters, train the Random Forest model, setting `ranger::ranger(..., probability = TRUE)`. This yields not a model predicting a binary class, but a *probability* of the target to be `TRUE`. This lets the user chose where to put the threshold for translating a probability to a binary class. E.g., if the predicted probability is $>0.5$, then consider this as a prediction of `TRUE`. Establish the Reicever-operating-characteristic curve, as described in [AGDS Book Chapter 8.3](https://geco-bern.github.io/agds_book/regression_classification.html#extra-material). 
+Using the optimised (or if you didn't manage - the initial default) hyperparameters, train the Random Forest model, setting `ranger::ranger(..., probability = TRUE)`. This yields not a model predicting a binary class, but a *probability* of the target to be `TRUE`. This lets the user chose where to put the threshold for translating a probability to a binary class. E.g., if the predicted probability is $>0.5$, then consider this as a prediction of `TRUE`. Establish the Reicever-operating-characteristic curve, as described in [AGDS Book Chapter 9.4.1.2](https://geco-bern.github.io/agds_book/regression_classification.html#metrics-for-classification). 
 
 Consider you inform an infrastructure construction project where waterlogged soils severely jeopardize the stability of the building. Then, consider you inform a project where waterlogged soils are unwanted, but not critical. In both cases, your prediction map of a binary classification is used as a basis and the binary classification is derived from the probabilistic prediction. How would you chose the threshold in each case? Would you chose the same threshold in both cases? If not, explain why. Can you think of an analogy of a similarly-natured problem in another realm?
 

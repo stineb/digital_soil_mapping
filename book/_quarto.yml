@@ -51,3 +51,4 @@ editor: visual
 execute: 
   warning: false
   freeze: auto
+  dir: ../

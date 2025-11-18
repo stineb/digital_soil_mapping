@@ -186,6 +186,31 @@ coord_train <- df_obs |>
   change_coords(
     from_CRS = 2056,
     to_CRS = 4326
+    )
+
+coord_test <- df_obs |> 
+  dplyr::filter(dataset == "validation") |> 
+  dplyr::select(site_id_unique, x, y) |> 
+  dplyr::rename(id = site_id_unique, lon = x, lat = y) |> 
+  change_coords(
+    from_CRS = 2056, 
+    to_CRS = 4326
+    )
+```
+
+```{r, eval = FALSE}
+#| code-fold: true
+# Notes: 
+# - This code may only work when installing the development branch of {leaflet}:
+# remotes::install_github('rstudio/leaflet')
+# - You might have to do library(terra) for R to find functions needed in the backend
+library(terra)
+
+# Let's get a nice color palette now for easy reference
+pal <- leaflet::colorNumeric(
+  "magma",
+  terra::values(rasta),
+  na.color = "transparent"
   )
 
 coord_test <- df_obs |>
@@ -249,9 +274,8 @@ leaflet() |>
   ) |>
   addLegend(
     pal = pal,
-    values = values(rasta),
-    title = "Slope (%)"
-  )
+    values = terra::values(rasta),
+    title = "Slope (%)")
 ```
 
 ::: callout-note
@@ -362,7 +386,7 @@ Alright, we see that we are not missing any data in the covariate data. Mostly s
 ## Save data
 
 ```{r}
-if (!dir.exists(here("data"))) system(paste0("mkdir ", here("data")))
+if (!dir.exists(here("data/"))) system(paste0("mkdir ", here("data/")))
 saveRDS(
   df_full,
   here("data/df_full.rds")
